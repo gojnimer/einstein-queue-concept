@@ -85,10 +85,10 @@ const sortQueueByCategory = (queue: Array<QueueItem>) =>
     )
     .sort((a, b) => {
       const priority = [
-        "waiting_for_assessment",
         "on_assessment",
-        "waiting_for_encounter",
         "on_encounter",
+        "waiting_for_assessment",
+        "waiting_for_encounter",
       ];
       return priority.indexOf(b.status) - priority.indexOf(a.status);
     })
@@ -249,10 +249,20 @@ export default function Home() {
           ))}
           {!categories.length && <p>Nenhuma categoria encontrada</p>}
         </>
+        <button
+          className={styles.btnAddPatient}
+          onClick={async (_e) =>
+            socket.emitEvent("push_to_queue", {
+              body: { queue_item: createFakePatient() },
+            })
+          }
+        >
+          Adicionar paciente
+        </button>
       </div>
       <div className={styles.queueContainer}>
         <>
-          <h2>Fila</h2>
+          <h2>PoC - Fila de atendimento (Socket + Redis)</h2>
           {categories
             .filter(
               ({ category }) => !categoryFilter.includes(category as never)
@@ -319,16 +329,6 @@ export default function Home() {
                 )}
               </>
             ))}
-          <button
-            className={styles.btnAddPatient}
-            onClick={async (_e) =>
-              socket.emitEvent("push_to_queue", {
-                body: { queue_item: createFakePatient() },
-              })
-            }
-          >
-            Adicionar paciente
-          </button>
         </>
       </div>
     </main>
