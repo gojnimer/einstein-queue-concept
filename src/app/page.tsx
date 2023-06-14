@@ -176,24 +176,6 @@ export default function Home() {
   const [categoryFilter, setCategoryFilter] = useState([]);
 
   useEffect(() => {
-    const fetchInitialData = async () => {
-      try {
-        const response = await socket.emitEvent("get_full_queue");
-        dispatch({
-          type: "update_queue",
-          payload: (response as string[]).map(
-            (item: string) => JSON.parse(item) as QueueItem
-          ) as Array<QueueItem>,
-        });
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-
-    fetchInitialData();
-  }, []);
-
-  useEffect(() => {
     socket.addListener("queue_updated", (data: string[]) => {
       dispatch({
         type: "update_queue",
