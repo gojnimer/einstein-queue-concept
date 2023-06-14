@@ -28,21 +28,26 @@ export default function Page({ params: { id } }: { params: { id: number } }) {
 
   return (
     <div className={styles.mainContainer}>
-      {encounter && (
-        <h2>Realizando o atendimento do paciente {encounter.patient_name}</h2>
+      {encounter ? (
+        <>
+          <h2>Realizando o atendimento do paciente {encounter.patient_name}</h2>
+          <button
+            className={styles.btnAction}
+            onClick={async () => {
+              await socket.emitEvent("pop_from_queue", {
+                body: {
+                  id,
+                },
+              });
+              router.replace("/");
+            }}
+          >
+            Finalizar atendimento
+          </button>
+        </>
+      ) : (
+        <h2>Carregando informações do paciente...</h2>
       )}
-      <button
-        onClick={async () => {
-          await socket.emitEvent("pop_from_queue", {
-            body: {
-              id,
-            },
-          });
-          router.replace("/");
-        }}
-      >
-        Finalizar atendimento
-      </button>
     </div>
   );
 }

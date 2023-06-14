@@ -244,7 +244,7 @@ export default function Home() {
       </div>
       <div className={styles.queueContainer}>
         <>
-          <h2>PoC - Fila de atendimento (Socket + Redis)</h2>
+          <h2 className={styles.stickyPageTitle}>PoC - Fila de atendimento (Socket + Redis)</h2>
           {categories
             .filter(
               ({ category }) => !categoryFilter.includes(category as never)
@@ -252,8 +252,8 @@ export default function Home() {
             .map(({ category, queue }, index) => (
               <>
                 <h3
-                  style={{ textTransform: "capitalize" }}
                   key={`queue-category-${index}`}
+                  className={styles.stickyHeader}
                 >
                   {category}
                 </h3>

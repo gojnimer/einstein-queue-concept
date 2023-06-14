@@ -33,7 +33,7 @@
 
 .btnAddPatient {
   position: sticky;
-  top:0;
+  top: 0;
   width: 100%;
   background-color: rgb(47, 131, 61);
   height: 60px;
@@ -84,4 +84,22 @@
   border-radius: 10px;
   background-color: rgb(204, 238, 236);
   column-gap: 2.5rem;
+}
+
+.stickyHeader {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 60px;
+  background-color: aliceblue;
+  padding: 1rem 0;
+  text-transform: capitalize;
+}
+
+.stickyPageTitle {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  background-color: aliceblue;
+  padding: 2rem 0;
+  text-transform: capitalize;
 }
