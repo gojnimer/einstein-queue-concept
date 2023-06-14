@@ -1,0 +1,8 @@
+.mainContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  place-items: center center;
+  padding: 4.5rem;
+  min-height: 70vh;
+  grid-gap: 2rem;
+}
